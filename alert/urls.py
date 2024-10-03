@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from canava.views import alert_message,message_re,login,register
+from canava.views import verify
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('alert',alert_message),
+    path('Registration',alert_message),
     path('message_re',message_re),
     path('login_c',login),
     path('register_c',register),
+    path('verify_email',verify),
 ]

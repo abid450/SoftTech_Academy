@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-     <style>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <style>
       *, *:before, *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -18,12 +20,36 @@ body {
 }
 
 form {
-  max-width: 300px;
+  max-width: 410px;
   margin: 10px auto;
   padding: 10px 20px;
   background: #f4f7f8;
   border-radius: 8px;
+  padding-right: 10px;
 }
+
+.dib1{
+            color: black;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 25px;
+            width:90%;
+            height: 100%;
+            background-color: white;
+            padding: 50px;
+            border-radius: 15px;
+            margin-left: 20px;
+            
+            }
+            h2{
+              font-size: 18.2px;
+              
+            }
+            h6{
+              font-size: 28px;
+              color: blue;
+              font-weight: 500;
+            }
 
 h1 {
   margin: 0 0 30px 0;
@@ -56,9 +82,18 @@ select {
   margin-bottom: 30px;
 }
 
+small{
+  font-size: 15px;
+  
+}
+
 input[type="radio"],
 input[type="checkbox"] {
   margin: 0 4px 8px 0;
+  
+}
+label{
+  padding-left: 4px;
 }
 
 select {
@@ -66,6 +101,7 @@ select {
   height: 32px;
   border-radius: 2px;
 }
+
 
 button {
   padding: 19px 39px 18px 39px;
@@ -116,6 +152,9 @@ label.light {
   border-radius: 100%;
 }
 
+
+
+
 @media screen and (min-width: 480px) {
 
   form {
@@ -127,82 +166,306 @@ label.light {
      </style>
   </head>
 <body>
-    <br><br>
-    <div class="col-md-5 mt-5 m-auto">
-    <form  action=""    method="POST">
-        {% for msg in messages %}
-        <div class="alert alert-{{msg.tags}}" role="alert">
-            <strong>Error: </strong>
-            {{ msg }}
-            
+    
+     <!---- nav bar ------------------------------------------------>
+    
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Menu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+           
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+    
+    <section class="body">
+     
+      <div class="container">
+          <div class="login-box">
+              <div class="row">
+                  <div class="col-sm-6">
+                      <div class="logo">
+                        <img src="{% static 'images/soft.jpeg' %}"  width="223px"   style="text-align: center; border-radius: 20px;"    alt="soft" />
+                             <br>  <br>
+                        <span class="logo-font" style="letter-spacing: 0.6px;">SoftTech</span><span> Academy</span>
+                  
+<hr>
+<h2>৫০% ডিস্কাউন্ট এ ভর্তি চলছে কম্পিউটার ক্লাস/ওয়েব ডেভেলপমেন্ট/গ্রাফিক ডিজাইন/ডিজিটাল মার্কেটিং/পাইথন প্রোগ্রামিং, ফ্রিল্যান্সিং ক্লাস</h2>
+<br>
+<small>📌 আপনি কি রেজিস্ট্রেশন করতে চান? রেজিস্ট্রেশন করতে নিচের ফরমটি ফিলাপ করুন।</small>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-6">
+                      <br>
+                      <h3 class="header-title">Registration Now</h3>
+                      <hr>
+                      
+                         <legend style="padding-left: 20px;"><span class="number"> 1</span> Basic Information</legend>
+                         <br>
+                         <form class="login-form" action="" method="POST" style="width: 250px; padding-right: 15px;padding-left: 5px;">
+                            {% for msg in messages %}
+                            <div class="alert alert-{{msg.tags}}" role="alert">
+                          <strong> </strong>
+                              {{ msg }}
+                              
 
+                            </div>
+                            
+                            {% endfor %}
+
+                          {% csrf_token %}
+                          <div class="form-group">
+                              <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
+                          </div>
+                          <div class="form-group">
+                              <input type="email" id="email" name="email" class="form-control" placeholder="Email Address" required>
+                              
+                          </div>
+                          <div class="form-group">
+                            <input type="number" id="phone_number" name="phone_number"  placeholder="+880 (MobileNo:)"    required>
+                            
+                        </div>
+                        <div class="form-group">
+                          <label>Age:</label>
+	  <input type="radio" id="age" value="Under 18" name="age" required><label for="under_18" class="light">Under 18</label><br>
+	  <input type="radio" id="age" value="18 Or Older" name="age" required><label for="over_18" class="light">18 or Older</label>
+	
+                          
+                      </div>
+                      <br>
+                      <div class="form-group">
+                        <fieldset>
+	  
+                          <legend><span class="number"> 2</span> Course Information</legend>
+                          
+                          <label for="bio">Biography:</label>
+                          <textarea id="biography" name="biography"></textarea>
+                          
+                          <label for="job">Select Course:</label>
+                          <select id="course_name" name="course_name"required>
+                          <optgroup label="Ms Office">
+                            <option value="Office Management">Office Management</option>
+                            
+                             </optgroup>
+                             <optgroup label="Design">
+                              <option value="Grapics Design">Grapics Design</option>
+                              
+                               </optgroup>
+                               <optgroup label="Web">
+                                <option value="Web Development (Python,Django)">Web Development (Python,Django)</option>
+                                <option value="Web Development (Django)">Web Development (Django)</option>
+                                
+                                 </optgroup>
+                                 <optgroup label="Programming">
+                                  <option value="Python Programming">Python Programming</option>
+                                  
+                                  
+                                   </optgroup>
+
+                                  </optgroup>
+                                  <optgroup label="Marketing">
+                                   <option value="Digital Marketing">Digital Marketing</option>
+                                   
+                                   
+                                    </optgroup>
+                               
+                          
+                          </select>
+                        
+                          <label>Interests:</label>
+                          <input type="radio" id="Development" value="Development" name="interest" required><label for="interest_development" class="light">Development</label><br>
+                          <input type="radio" id="Design" value="Design" name="interest" required><label  for="interest_design" class="light">Design</label><br>
+                          <input type="radio" id="Marketing" value="Marketing" name="interest" required><label  for="interest_marketing" class="light">Marketing</label>
+                          
+                        </fieldset>
+                          
+                        
+                    </div>
+
+                          <div class="form-group">
+                              <button class="btn btn-primary btn-block" type="submit">Enroll</button>
+                          </div>
+                          
+                      </form>
+                  </div>
+                  <div class="col-sm-6 hide-on-mobile">
+                      <div id="demo" class="carousel slide" data-ride="carousel">
+                          <!-- Indicators -->
+                          <ul class="carousel-indicators">
+                              <li data-target="#demo" data-slide-to="0" class="active"></li>
+                              <li data-target="#demo" data-slide-to="1"></li>
+                          </ul>
+                          <!-- The slideshow -->
+                          <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                  <div class="slider-feature-card">
+                                      <img src="https://i.imgur.com/YMn8Xo1.png" alt="">
+                                      <h3 class="slider-title">Title Here</h3>
+                                      <p class="slider-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, odio!</p>
+                                  </div>
+                              </div>
+                              
+                              <div class="carousel-item">
+                                  <div class="slider-feature-card">
+                                      <img src="https://i.imgur.com/Yi5KXKM.png" alt="">
+                                      <h3 class="slider-title">Title Here</h3>
+                                      <p class="slider-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, debitis?</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <br><br>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="slider-feature-card">
+                                    <img src="https://i.imgur.com/YMn8Xo1.png" alt="">
+                                    <h3 class="slider-title">Title Here</h3>
+                                    <p class="slider-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, odio!</p>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-item">
+                                <div class="slider-feature-card">
+                                    <img src="https://i.imgur.com/Yi5KXKM.png" alt="">
+                                    <h3 class="slider-title">Title Here</h3>
+                                    <p class="slider-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, debitis?</p>
+                                </div>
+                            </div>
+                        </div>
+                          <!-- Left and right controls -->
+                          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                              <span class="carousel-control-prev-icon"></span>
+                          </a>
+                          <a class="carousel-control-next" href="#demo" data-slide="next">
+                              <span class="carousel-control-next-icon"></span>
+                          </a>
+                      </div>
+                  </div>
+              </div>
           </div>
-          
-          {% endfor %}
-          {% csrf_token %}
-          <h1>Sign Up</h1>
-        
-          <fieldset>
-            
-            <legend><span class="number">1</span> Your basic info</legend>
-            
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            
-            <label for="mail">Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="number">Mobile No:</label>
-            <input type="number" id="phone_number" name="phone_number" required>
-            
-            <label>Age:</label>
-            <input type="radio" id="age" value="Under 19" name="age" required><label for="under_13" class="light">Under 19</label><br>
-            <input type="radio" id="age" value="19 Or Older" name="age" required><label for="over_13" class="light">19 or Older</label>
-          
-          </fieldset>
-          
-          <fieldset>
-            
-            <legend><span class="number">2</span> Your profile</legend>
-            
-            <label for="bio">Biography:</label>
-            <textarea id="biography" name="biography"></textarea>
-            
-            <label for="job">Job role:</label>
-            <select id="job_role" name="job_role" required>
-              <optgroup label="Web">
-                <option value="Front-End Developer">Front-End Developer</option>
-                <option value="PHP Developer">PHP Developer</option>
-                <option value="Python Developer">Python Developer</option>
-                <option value="Django Developer">Django Developer</option>
-                <option value="Web Designer">Web Designer</option>
-                <option value="WordPress Developer">WordPress Developer</option>
-              </optgroup>
-              <optgroup label="Mobile">
-                <option value="Android Developer">Android Developer</option>
-                <option value="iOS Developer">iOS Developer</option>
-                <option value="Mobile Designer">Mobile Designer</option>
-              </optgroup>
-              <optgroup label="Business">
-                <option value="Business Owner">Business Owner</option>
-                <option value="Freelancer">Freelancer</option>
-              </optgroup>
-            </select>
-          
-            <label>Interests:</label>
-            <input type="radio" id="Development" value="Development" name="interest" required><label for="interest_development" class="light">Development</label><br>
-            <input type="radio" id="Design" value="Design" name="interest" required><label  for="interest_design" class="light">Design</label><br>
-            <input type="radio" id="System" value="System" name="interest" required><label  for="interest_business" class="light">System</label>
-            
-          </fieldset>
-            
-          <button type="submit">Sign Up</button>
-          
-        </form>
-        
+      </div>
+  </section>
+    
       <br><br><br>
 
-     
-
+      <footer class="bg-dark text-center" style="color: white; font-weight: 500;">
+        <!-- Grid container -->
+        <div class="container p-4">
+          <!-- Section: Social media -->
+          <section class="mb-8" style="color: white;">
+            <!-- Facebook -->
+            <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button" style="color: white;"        ><i class="fab fa-facebook-f"></i
+            ></a>
+      
+            <!-- Twitter -->
+            <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+              ><i class="fab fa-twitter"></i
+            ></a>
+      
+            <!-- Google -->
+            <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+              ><i class="fab fa-google"></i
+            ></a>
+      
+            <!-- Instagram -->
+            <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+              ><i class="fab fa-instagram"></i
+            ></a>
+      
+            <!-- Linkedin -->
+            <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+      
+            <!-- Github -->
+            <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+      
+          <!-- Section: Form -->
+          <section class="">
+            <form action="">
+              <!--Grid row-->
+              <div class="row d-flex justify-content-center">
+                <!--Grid column-->
+              
+                <!--Grid column-->
+                <div class="col-md-5 col-12">
+                  
+                <!--Grid column-->
+              </div>
+              <!--Grid row-->
+            </form>
+          </section>
+          <!-- Section: Form -->
+      
+          <!-- Section: Text -->
+          <section class="mb-4">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
+              repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam eum
+              harum corrupti dicta, aliquam sequi voluptate quas.
+            </p>
+          </section>
+          <!-- Section: Text -->
+      
+          <!-- Section: Links -->
+          <section class="">
+            <!--Grid row-->
+            <div class="row">
+              <!--Grid column-->
+              <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links</h5>
+      
+                
+              </div>
+              <!--Grid column-->
+      
+             
+                </ul>
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+          </section>
+          <!-- Section: Links -->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+          © 2024 Copyright:
+          <a class="text-reset fw-bold" href="#">Developed By Abid</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+      <!-- Footer -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

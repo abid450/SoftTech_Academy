@@ -1,21 +1,77 @@
-from django.shortcuts import render,HttpResponseRedirect
-from .models import alert_message_m
-
+from django.shortcuts import render,HttpResponseRedirect,redirect
+from .models import SoftTech_Student_id
+from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 from django.contrib import messages
-
+from django.contrib.auth import get_user_model
+from .models import *
+import uuid
+from .utils import *
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def login(request):
     return render(request,'login.html')
 
 
+# Register form ------------------------------------
+@csrf_exempt
 def register(request):
+    if request.method == 'POST':
+        usern = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password1')
+        confirmpassw = request.POST.get('password2')
+        user_obj = User(username = email)
+        user_obj.set_password (password)
+        p_obj = SoftTech_Student_id.objects.create(
+            user = user_obj,
+            email_token = str(uuid.uuid4())
+        )
+        send_email_token(email,p_obj.email_token)
+
+        if password!=confirmpassw:
+            messages.warning(request, 'Password did not Match !') 
+            return redirect('/register_c')
+       
+
+        try:
+            if User.objects.get(username=usern):
+                messages.error(request,'This Username Already Exist')
+                return redirect('/register_c')
+            
+        except:
+            pass
+        
+        try:
+            if User.objects.get(email=email):
+                messages.error(request, 'This Email Already Exist')
+                return redirect('/register_c')
+        except:
+            pass
+
+    
+        user = User.objects.create_user(usern,email,password,confirmpassw)
+        user.save()    
+        messages.success(request, 'You are Successfully Sign Up')
+        return redirect('/register_c')
     return render(request, 'register.html')
 
 
 
+def verify(request, token):
+    try:
+        obj = SoftTech_Student_id.objects.get(email_token = token)
+        obj.is_verified = True
+        obj.save()
+        messages.success(request, 'your account verify')
+    
+    except Exception as e:
+        messages.success(request, 'invalid token')
 
-
+# Alert Form -------------------------------------------------
 def alert_message(request):
     
     if request.method== 'POST':
@@ -24,27 +80,26 @@ def alert_message(request):
         phone_number = request.POST['phone_number']
         age = request.POST['age']
         biography = request.POST['biography']
-        job_role = request.POST['job_role']
+        course_name = request.POST['course_name']
         interest = request.POST['interest']
 
         
-        if len(email)<22:
-            messages.warning(request,'Invalid This email, Please Enter Your Correct Email')
+      
 
-        if alert_message_m.objects.filter(phone_number=phone_number).exists():
-            messages.error(request, 'This Number Already Exist, Please Enter Your Correct Number')
+        if SoftTech_Student_id.objects.filter(email=email).exists() or SoftTech_Student_id.objects.filter(phone_number=phone_number).exists():
+            messages.error(request, 'This Value Already Exist, Please Try Another Value')
+
         
-        if alert_message_m.objects.filter(email=email).exists():
-            messages.error(request,'This Email Account Already Exist, Please Enter a Another Account')
 
         else:
-            contect = alert_message_m(name=name,email=email,phone_number=phone_number,age=age,biography=biography,job_role=job_role,interest=interest)
+            contect = SoftTech_Student_id(name=name,email=email,phone_number=phone_number,age=age,biography=biography,course_name=course_name,interest=interest)
             contect.save()
-            
+            #messages.success(request, 'Congratulations🎉🎉🎉 আপনি আমাদের কোর্সে সফল ভাবে এনরোল করেছেন')
             return HttpResponseRedirect('/message_re')
         
     return render(request, 'alert.html')
 
+# Alert Form Redirect -------------------------------------
 def message_re(request):
-    messages.success(request,'Your message has been Successfully Sent')
+    #messages.success(request,'You are Successfully Enroll Now')
     return render(request, 'redirect.html')

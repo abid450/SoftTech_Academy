@@ -142,3 +142,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Media url-------------------
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
+# Email Verification -----------------------------------------
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sayemhasan25784@gmail.com' 
+EMAIL_HOST_PASSWORD = 'lojb tqvn htfh rmpu'
+
+DEFAULT_FROM_EMAIL = 'Softtech Academy <sayemhasan25784@gmail.com>'

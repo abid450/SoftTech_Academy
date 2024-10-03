@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import alert_message_m
+from .models import SoftTech_Student_id
 # Register your models here.
-admin.site.register(alert_message_m)
+admin.site.register(SoftTech_Student_id)
